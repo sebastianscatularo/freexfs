@@ -1,0 +1,9 @@
+XFSMEDIA    "EFMedia"
+BEGIN
+    TYPE        GENERIC
+    UNIT        INCH,1000,1000
+    SIZE        1132,2617           // 9.44 * 21.81 inch ( or 240 * 554 mm )
+    FOLD        HORIZONTAL
+    PAGE        0
+    LINES       0
+END

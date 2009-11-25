@@ -1,0 +1,7 @@
+; $$root$$.def : Declares the module parameters for the DLL.
+
+LIBRARY      "$$root$$"
+DESCRIPTION  'SPI_LQ2090 Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here

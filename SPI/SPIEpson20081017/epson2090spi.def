@@ -1,0 +1,19 @@
+; epson2090spi.def : Declares the module parameters for the DLL.
+
+LIBRARY      "epson2090spi"
+DESCRIPTION  'SPI_LQ2090 Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+
+	WFPCancelAsyncRequest
+	WFPClose
+	WFPDeregister
+	WFPExecute
+	WFPGetInfo
+	WFPLock
+	WFPOpen
+	WFPRegister
+	WFPSetTraceLevel
+	WFPUnloadService
+	WFPUnlock

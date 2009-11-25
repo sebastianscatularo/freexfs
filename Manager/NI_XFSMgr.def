@@ -1,0 +1,44 @@
+; NI_XFSMgr.def : Declares the module parameters for the DLL.
+
+LIBRARY      "NI_XFSMgr"
+DESCRIPTION  'NI_XFSMgr Windows Dynamic Link Library'
+
+EXPORTS
+    ; Explicit exports can go here
+
+	WFSCancelAsyncRequest 
+	WFSCancelBlockingCall 
+	WFSCleanUp
+	WFSClose
+	WFSAsyncClose 
+	WFSCreateAppHandle 
+	WFSDeregister
+	WFSAsyncDeregister
+	WFSDestroyAppHandle
+	WFSExecute 
+	WFSAsyncExecute
+	WFSFreeResult
+	WFSGetInfo 
+	WFSAsyncGetInfo
+	WFSIsBlocking
+	WFSLock
+	WFSAsyncLock
+	WFSOpen
+	WFSAsyncOpen
+	WFSRegister
+	WFSAsyncRegister
+	WFSSetBlockingHook 
+	WFSStartUp 
+	WFSUnhookBlockingHook
+	WFSUnlock 
+	WFSAsyncUnlock 
+	WFMSetTraceLevel
+
+	WFMAllocateBuffer
+	WFMAllocateMore
+	WFMFreeBuffer
+	WFMGetTraceLevel
+	WFMKillTimer
+	WFMOutputTraceData
+	WFMReleaseDLL
+	WFMSetTimer

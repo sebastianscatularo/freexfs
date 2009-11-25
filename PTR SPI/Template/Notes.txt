@@ -1,0 +1,19 @@
+The registry location to store form file paths.
+
+HKEY_USERS/DEFAULT/XFS/LOGICAL_SERVICE/BouncedCecks/Forms
+
+BouncedCheck is the logical service name.
+Forms contains all the form names and its file path like
+
+	aaa c:\myform1.txt
+	bbb c:\myform2.txt
+
+	aaa and bbb are  the form names.
+
+In HKEY_USERS/DEFAULT/XFS/LOGICAL_SERVICE/BouncedCecks
+ the value DeviceName is the printer DevceName like "EPSON LQ-2090C ESC/P2."
+
+	DeviceName EPSON LQ-2090C ESC/P2
+
+So to use the spi, one must specify DeviceName and add form path to 
+	HKEY_USERS/DEFAULT/XFS/LOGICAL_SERVICE/BouncedCecks/Forms

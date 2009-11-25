@@ -1,0 +1,34 @@
+HKCR
+{
+	PTROcx.XFSPrint.1 = s 'XFSPrint Class'
+	{
+		CLSID = s '{153194CA-33B1-408B-98BF-26F907DA4C91}'
+	}
+	PTROcx.XFSPrint = s 'XFSPrint Class'
+	{
+		CLSID = s '{153194CA-33B1-408B-98BF-26F907DA4C91}'
+		CurVer = s 'PTROcx.XFSPrint.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {153194CA-33B1-408B-98BF-26F907DA4C91} = s 'XFSPrint Class'
+		{
+			ProgID = s 'PTROcx.XFSPrint.1'
+			VersionIndependentProgID = s 'PTROcx.XFSPrint'
+			ForceRemove 'Programmable'
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			ForceRemove 'Control'
+			ForceRemove 'Insertable'
+			ForceRemove 'ToolboxBitmap32' = s '%MODULE%, 102'
+			'MiscStatus' = s '0'
+			{
+			    '1' = s '131473'
+			}
+			'TypeLib' = s '{021C4385-4225-44D2-8389-D3B5DB672FBF}'
+			'Version' = s '1.0'
+		}
+	}
+}
