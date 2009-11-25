@@ -1,0 +1,59 @@
+$$// newproj.inf = template for list of template files
+$$//  format is 'sourceResName' \t 'destFileName'
+$$//    The source res name may be preceded by any combination of '=', '-',  '!', '?', ':', '#', and/or '*'
+$$//       '=' => the resource is binary
+$$//       '-' => the file should not be added to the project (all files are added to the project by default)
+$$//       '!' => the file should be marked exclude from build
+$$//       '?' => the file should be treated as a help file
+$$//       ':' => the file should be treated as a resource
+$$//       '#' => the file should be treated as a template (implies '!')
+$$//       '*' => bypass the custom AppWizard's resources when loading
+$$//	if name starts with / => create new subdir
+
+
+
+/myfile
+/myfile\others
+/res
+
+
+CREATEOR.CPP	Createor.cpp
+CREATEOR.H	Createor.h
+ROOT.CPP	$$root$$.cpp
+=ROOT.DEF	$$root$$.def
+ROOT.H	$$root$$.h
+ROOT.RC	$$root$$.rc
+=FORM.TXT	form.txt
+HELPER.H	helper.h
+TOOLSFUNCTION.CPP	myfile\others\toolsFunction.cpp
+=TOOLSFUNCTION.H	myfile\others\toolsFunction.h
+=PRINTERBASE.CPP	myfile\printerbase.cpp
+=PRINTERBASE.H	myfile\printerbase.h
+=XFSHELPER.CPP	myfile\xfshelper.cpp
+=XFSHELPER.H	myfile\xfshelper.h
+=XFSPTRDATA.H	myfile\xfsptrdata.h
+XFSTOOLSFUNCTION.CPP	myfile\xfsToolsFunction.cpp
+=XFSTOOLSFUNCTION.H	myfile\xfsToolsFunction.h
+=NOTES.TXT	Notes.txt
+README.TXT	ReadMe.txt
+:ROOT.RC2	res\$$root$$.rc2
+RESOURCE.H	Resource.h
+=SERVICEBASIC.CPP	ServiceBasic.cpp
+SERVICEBASIC.H	ServiceBasic.h
+STDAFX.CPP	StdAfx.cpp
+STDAFX.H	StdAfx.h
+WORKTHREAD.CPP	WorkThread.cpp
+WORKTHREAD.H	WorkThread.h
+XFSFIELD.CPP	XFSField.cpp
+XFSFIELD.H	XFSField.h
+XFSFORM.CPP	XFSForm.cpp
+XFSFORM.H	XFSForm.h
+XFSFRAME.CPP	XFSFrame.cpp
+XFSFRAME.H	XFSFrame.h
+XFSMEDIA.CPP	XFSMedia.cpp
+XFSMEDIA.H	XFSMedia.h
+XFSSPI.H	XFSSPI.H
+XFSSUBFORM.CPP	XFSSubform.cpp
+XFSSUBFORM.H	XFSSubform.h
+
+

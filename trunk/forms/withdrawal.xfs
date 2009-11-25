@@ -1,0 +1,10 @@
+XFSFORM "AAA"
+BEGIN
+UNIT INCH, 48,48
+SIZE 200,100      
+XFSFIELD "Account Number"
+BEGIN
+POSITION 48,9  
+INITIALVALUE "this is initialvalue"
+END   
+END

@@ -1,0 +1,19 @@
+XFSFORM "NewForm1"
+BEGIN
+  UNIT INCH, 16, 16
+  SIZE 121, 64
+  LANGUAGE 0
+  XFSFIELD "New Field1"
+  BEGIN
+    POSITION 2, 1
+    SIZE 10, 10
+    INITIALVALUE "Data-1"
+  END
+  XFSFIELD "New Field2"
+  BEGIN
+    POSITION 3, 2
+    SIZE 10, 10
+    INITIALVALUE "Data-2"
+  END
+END
+

@@ -1,0 +1,62 @@
+// PTROcx.idl : IDL source for PTROcx.dll
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (PTROcx.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+#include "olectl.h"
+	
+
+	[
+		object,
+		uuid(B7F5141D-9002-4128-AB29-54A443EF5FC6),
+		dual,
+		helpstring("IXFSPrint Interface"),
+		pointer_default(unique)
+	]
+	interface IXFSPrint : IDispatch
+	{
+		[propget, id(1), helpstring("property XFSMgrPath")] HRESULT XFSMgrPath([out, retval] BSTR *pVal);
+		[propput, id(1), helpstring("property XFSMgrPath")] HRESULT XFSMgrPath([in] BSTR newVal);
+		[propget, id(2), helpstring("property LogicalService")] HRESULT LogicalService([out, retval] BSTR *pVal);
+		[propput, id(2), helpstring("property LogicalService")] HRESULT LogicalService([in] BSTR newVal);
+		[propget, id(3), helpstring("property FormName")] HRESULT FormName([out, retval] BSTR *pVal);
+		[propput, id(3), helpstring("property FormName")] HRESULT FormName([in] BSTR newVal);
+		[id(4), helpstring("method AddField")] HRESULT AddField([in]BSTR bstrTag, [in]BSTR bstrValue);
+		[id(5), helpstring("method DoPrint")] HRESULT DoPrint();
+		[propget, id(6), helpstring("property Result")] HRESULT Result([out, retval] BSTR *pVal);
+		[propput, id(6), helpstring("property Result")] HRESULT Result([in] BSTR newVal);
+	};
+
+[
+	uuid(021C4385-4225-44D2-8389-D3B5DB672FBF),
+	version(1.0),
+	helpstring("PTROcx 1.0 Type Library")
+]
+library PTROCXLib
+{
+	importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+	[
+		uuid(5BD05B62-DED9-49A6-827C-6380686C8E69),
+		helpstring("_IXFSPrintEvents Interface")
+	]
+	dispinterface _IXFSPrintEvents
+	{
+		properties:
+		methods:
+	};
+
+	[
+		uuid(153194CA-33B1-408B-98BF-26F907DA4C91),
+		helpstring("XFSPrint Class")
+	]
+	coclass XFSPrint
+	{
+		[default] interface IXFSPrint;
+		[default, source] dispinterface _IXFSPrintEvents;
+	};
+};
