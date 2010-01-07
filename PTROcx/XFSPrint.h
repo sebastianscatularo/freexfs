@@ -46,6 +46,7 @@ public:
 	CString	m_strVersionXFS;
 	CString	m_strXFSPath;
 	CString	m_strFormName;
+	CString	m_strMediaName;
 
 	HMODULE m_hLib;
 
@@ -111,6 +112,8 @@ END_MSG_MAP()
 
 // IXFSPrint
 public:
+	STDMETHOD(get_MediaName)(/*[out, retval]*/ BSTR *pVal);
+	STDMETHOD(put_MediaName)(/*[in]*/ BSTR newVal);
 	STDMETHOD(get_Result)(/*[out, retval]*/ BSTR *pVal);
 	STDMETHOD(put_Result)(/*[in]*/ BSTR newVal);
 	STDMETHOD(DoPrint)();

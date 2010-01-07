@@ -14,9 +14,9 @@
 
 #include "resource.h"		// main symbols
 
-#include "..\..\Manager\NI_XFSAPI.h"   // You may change this to appropriate path
+#include "..\..\Manager\NI_XFSAPI.h"
 typedef HANDLE HPROVIDER; 
-#include "..\..\Manager\NI_XFSManager.h" // You may change this to appropriate path
+#include "..\..\Manager\NI_XFSManager.h"
 
 
 /////////////////////////////////////////////////////////////////////////////

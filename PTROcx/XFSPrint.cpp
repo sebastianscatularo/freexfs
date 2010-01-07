@@ -14,6 +14,7 @@ HRESULT CXFSPrint::FinalConstruct()
 	m_strVersionXFS = _T("00029903");
 	m_strXFSPath = "";
 	m_strFormName = "";
+	m_strMediaName = "";
 
 	m_hLib = 0;
 	m_pTextOutExecute = 0;
@@ -200,11 +201,21 @@ STDMETHODIMP CXFSPrint::DoPrint()
     */
 
 	WFSPTRPRINTFORM *pwfsform = 0;
-	m_pfnWFMAllocateBuffer(sizeof(WFSPTRPRINTFORM), WFS_MEM_ZEROINIT, (void **)&pwfsform);
+	m_pfnWFMAllocateBuffer(sizeof(WFSPTRPRINTFORM),
+		WFS_MEM_ZEROINIT | WFS_MEM_SHARE, 
+		(void **)&pwfsform);
 
-	m_pfnWFMAllocateMore(m_strFormName.GetLength()+1, pwfsform, (void **)&pwfsform->lpszFormName);
-	memcpy(pwfsform->lpszFormName,m_strFormName.GetBuffer(0),m_strFormName.GetLength() * sizeof(TCHAR));
-
+	if(m_strFormName != "")
+	{
+		m_pfnWFMAllocateMore(m_strFormName.GetLength()+1, pwfsform, (void **)&pwfsform->lpszFormName);
+		memcpy(pwfsform->lpszFormName,m_strFormName.GetBuffer(0),m_strFormName.GetLength() * sizeof(TCHAR));
+	}
+// 20091218
+	if(m_strMediaName != "")
+	{
+		m_pfnWFMAllocateMore(m_strMediaName.GetLength()+1, pwfsform, (void **)&pwfsform->lpszMediaName);
+		memcpy(pwfsform->lpszMediaName,m_strMediaName.GetBuffer(0),m_strMediaName.GetLength() * sizeof(TCHAR));
+	}
 #ifndef _UNICODE
 	m_pfnWFMAllocateMore(nCountNeeded, pwfsform, (void **)&pwfsform->lpszFields);
 	memcpy(pwfsform->lpszFields, m_pTextOutExecute,nCountNeeded);
@@ -212,7 +223,6 @@ STDMETHODIMP CXFSPrint::DoPrint()
 	m_pfnWFMAllocateMore(nCountNeeded * sizeof(TCHAR), pwfsform, (void **)&pwfsform->lpszUNICODEFields);
 	memcpy(pwfsform->lpszUNICODEFields, m_pTextOutExecute,nCountNeeded  * sizeof(TCHAR));
 #endif
-	
 	
 	pwfsform->wAlignment = WFS_PTR_ALNUSEFORMDEFN;
 	pwfsform->wOffsetX = WFS_PTR_OFFSETUSEFORMDEFN;
@@ -262,6 +272,7 @@ STDMETHODIMP CXFSPrint::DoPrint()
 
 BOOL CXFSPrint::LoadManagerFunction(CString strPath)
 {
+	if(m_hLib != NULL) return TRUE;
 	m_strResult = "";
 	m_hLib = LoadLibrary(strPath);
 	if(m_hLib == NULL)
@@ -369,6 +380,24 @@ STDMETHODIMP CXFSPrint::put_Result(BSTR newVal)
 	AFX_MANAGE_STATE(AfxGetStaticModuleState())
 
 	// TODO: Add your implementation code here
+
+	return S_OK;
+}
+
+STDMETHODIMP CXFSPrint::get_MediaName(BSTR *pVal)
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+
+	*pVal = m_strMediaName.AllocSysString();
+
+	return S_OK;
+}
+
+STDMETHODIMP CXFSPrint::put_MediaName(BSTR newVal)
+{
+	AFX_MANAGE_STATE(AfxGetStaticModuleState())
+
+	m_strMediaName = CString((LPCWSTR)newVal);
 
 	return S_OK;
 }

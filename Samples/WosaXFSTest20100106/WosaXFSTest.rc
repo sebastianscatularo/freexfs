@@ -1,0 +1,627 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Chinese (Taiwan) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHT)
+#ifdef _WIN32
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_TRADITIONAL
+#pragma code_page(950)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\WosaXFSTest.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_DIALOG_SELECT_GETINFO DIALOG DISCARDABLE  0, 0, 187, 113
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select GetInfo"
+FONT 10, "System"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,76,88,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,132,88,50,14
+    CONTROL         "WFS_INF_PTR_STATUS",IDC_RADIO_WFS_INF_PTR_STATUS,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,14,6,94,10
+    CONTROL         "WFS_INF_PTR_CAPABILITIES",
+                    IDC_RADIO_WFS_INF_PTR_CAPABILITIES,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,14,18,113,10
+    CONTROL         "WFS_INF_PTR_FORM_LIST",IDC_RADIO_WFS_INF_PTR_FORM_LIST,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,14,28,107,10
+    CONTROL         "WFS_INF_PTR_MEDIA_LIST",
+                    IDC_RADIO_WFS_INF_PTR_MEDIA_LIST,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,14,38,108,10
+    CONTROL         "WFS_INF_PTR_QUERY_FORM",
+                    IDC_RADIO_WFS_INF_PTR_QUERY_FORM,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,14,50,117,10
+    CONTROL         "WFS_INF_PTR_QUERY_MEDIA",
+                    IDC_RADIO_WFS_INF_PTR_QUERY_MEDIA,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,14,60,118,10
+    CONTROL         "WFS_INF_PTR_QUERY_FIELD",
+                    IDC_RADIO_WFS_INF_PTR_QUERY_FIELD,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,14,72,116,10
+END
+
+IDD_DIALOG_SELECT_CMD DIALOG DISCARDABLE  0, 0, 187, 145
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Select Command"
+FONT 10, "System"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,70,126,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,126,124,50,14
+    CONTROL         "WFS_CMD_PTR_CONTROL_MEDIA",IDC_RADIO_CONTROL_MEDIA,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP,14,6,
+                    132,10
+    CONTROL         "WFS_CMD_PTR_PRINT_FORM",IDC_RADIO_PRINT_FORM,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,14,16,132,10
+    CONTROL         "WFS_CMD_PTR_READ_FORM",IDC_RADIO_READ_FORM,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,14,26,132,10
+    CONTROL         "WFS_CMD_PTR_RAW_DATA",IDC_RADIO_RAW_DATA,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,14,36,132,10
+    CONTROL         "WFS_CMD_PTR_MEDIA_EXTENTS",IDC_RADIO_MEDIA_EXTENTS,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,14,46,132,10
+    CONTROL         "WFS_CMD_PTR_RESET_COUNT",IDC_RADIO_RESET_COUNT,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,14,56,132,10
+    CONTROL         "WFS_CMD_PTR_READ_IMAGE",IDC_RADIO_READ_IMAGE,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,14,66,132,10
+    CONTROL         "WFS_CMD_PTR_RESET",IDC_RADIO_PTR_RESET,"Button",
+                    BS_AUTORADIOBUTTON | WS_TABSTOP,14,76,132,10
+    CONTROL         "WFS_CMD_PTR_RETRACT_MEDIA",IDC_RADIO_RETRACT_MEDIA,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,14,86,132,10
+    CONTROL         "WFS_CMD_PTR_DISPENSE_PAPER",IDC_RADIO_DISPENSE_PAPER,
+                    "Button",BS_AUTORADIOBUTTON | WS_TABSTOP,14,96,132,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_DIALOG_SELECT_GETINFO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 106
+    END
+
+    IDD_DIALOG_SELECT_CMD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 180
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 138
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Chinese (Taiwan) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 235, 55
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About WosaXFSTest"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,11,17,20,20
+    LTEXT           "WosaXFSTest Version 1.0",IDC_STATIC,40,10,119,8,
+                    SS_NOPREFIX
+    LTEXT           "Copyright (C) 2008",IDC_STATIC,40,25,119,8
+    DEFPUSHBUTTON   "OK",IDOK,178,7,50,14,WS_GROUP
+END
+
+IDD_WOSAXFSTEST_FORM DIALOG DISCARDABLE  0, 0, 494, 316
+STYLE WS_CHILD
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "SyncOpen",IDC_BUTTON_SYNC_OPEN,6,86,50,14
+    PUSHBUTTON      "AsyncOpen",IDC_BUTTON_AsycOPEN,144,86,50,14
+    PUSHBUTTON      "SyncClose",IDC_BUTTON_SYNC_CLOSE,6,106,50,14
+    PUSHBUTTON      "AsyncClose",IDC_BUTTON_ASYNC_CLOSE,144,106,50,14
+    PUSHBUTTON      "SyncExecute",IDC_BUTTON_SYNC_EXECUTE,6,126,50,14
+    PUSHBUTTON      "AsyncExecute",IDC_BUTTON_ASYNC_EXECUTE,144,124,50,14
+    PUSHBUTTON      "SyncGetInfo",IDC_BUTTON_SYNC_GETINFO,6,146,50,14
+    PUSHBUTTON      "AsyncGetInfo",IDC_BUTTON_ASYNC_GETINFO,144,144,50,14
+    PUSHBUTTON      "AsyncRegister",IDC_BUTTON_ASYNC_REGISTER,144,162,50,14
+    PUSHBUTTON      "SyncRegister",IDC_BUTTON_SYNC_REGISTER,6,164,50,14
+    PUSHBUTTON      "SyncDeregister",IDC_BUTTON_SYNC_DEREGISTER,6,184,50,14
+    PUSHBUTTON      "AsyncDeregister",IDC_BUTTON_ASYNC_DEREGISTER,144,182,50,
+                    14
+    PUSHBUTTON      "SyncLock",IDC_BUTTON_SYNC_LOCK,6,202,50,14
+    PUSHBUTTON      "AsyncLock",IDC_BUTTON_ASYNC_LOCK,144,200,50,14
+    PUSHBUTTON      "SyncUnlock",IDC_BUTTON_SYNC_UNLOCK,6,220,50,14
+    PUSHBUTTON      "AsyncUnlock",IDC_BUTTON_ASYNC_UNLOCK,144,220,50,14
+    RTEXT           "Forms",IDC_STATIC,32,24,40,8
+    EDITTEXT        IDC_EDIT_RESULT,206,36,286,274,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | 
+                    WS_VSCROLL
+    LTEXT           "Result",IDC_STATIC,204,26,21,8
+    RTEXT           "Local Service",IDC_STATIC,8,4,50,8
+    RTEXT           "XFSMgr \nVersionRange ",IDC_STATIC,2,38,48,18
+    EDITTEXT        IDC_EDIT_VERSION_XFS,152,40,46,16,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    RTEXT           "SPI \nVersion Range",IDC_STATIC,0,58,50,18
+    EDITTEXT        IDC_EDIT_VERSION_SPI,152,58,46,16,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    PUSHBUTTON      "StartUp",IDC_BUTTON_START_UP,60,78,78,14
+    PUSHBUTTON      "CleanUp",IDC_BUTTON_CLEAN_UP,62,220,76,14
+    PUSHBUTTON      "XFSMgr",IDC_BUTTON_XFSMgr,204,6,58,14
+    EDITTEXT        IDC_EDIT_XFS_PATH,268,6,218,14,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_FORMS,84,20,68,156,CBS_DROPDOWN | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_COMBO_FIELDS,60,107,76,74,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Fields",IDC_STATIC,60,96,58,8
+    COMBOBOX        IDC_COMBO_MEDIA,62,202,62,46,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Media",IDC_STATIC,62,192,46,8
+    COMBOBOX        IDC_COMBO_SERVICE,64,2,96,98,CBS_DROPDOWN | CBS_SORT | 
+                    WS_VSCROLL | WS_TABSTOP
+    EDITTEXT        IDC_EDIT_DEVICE_CLASS,164,2,24,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_EXE_COMMAND,76,126,60,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    EDITTEXT        IDC_EDIT_GETINFO_CATEGORY,76,146,60,14,ES_AUTOHSCROLL | 
+                    ES_READONLY
+    PUSHBUTTON      "C",IDC_BUTTON_EXE_CMD,60,126,14,14
+    PUSHBUTTON      "C",IDC_BUTTON_GETINFO_CAT,60,146,14,14
+    EDITTEXT        IDC_EDIT_VERSION_XFS_L,68,40,28,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_VERSION_XFS_H,118,40,28,16,ES_AUTOHSCROLL
+    RTEXT           "Low",IDC_STATIC,52,44,16,10
+    RTEXT           "High",IDC_STATIC,98,44,16,10
+    EDITTEXT        IDC_EDIT_VERSION_SPI_L,68,58,28,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_VERSION_SPI_H,118,58,28,16,ES_AUTOHSCROLL
+    RTEXT           "Low",IDC_STATIC,52,62,16,10
+    RTEXT           "High",IDC_STATIC,98,62,16,10
+    LTEXT           "Event Range Low",IDC_STATIC,8,242,58,8
+    EDITTEXT        IDC_EDIT_EVENTRANGE_LOW,70,238,48,14,ES_AUTOHSCROLL
+    LTEXT           "High",IDC_STATIC,126,242,16,8
+    EDITTEXT        IDC_EDIT_EVENTRANGE_HIGH,144,240,46,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_EVENT_RECEIVED,10,260,182,50,ES_AUTOHSCROLL | 
+                    ES_READONLY
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 228
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 48
+    END
+
+    IDD_WOSAXFSTEST_FORM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 487
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 309
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\WosaXFSTest.ico"
+IDR_WOSAXFTYPE          ICON    DISCARDABLE     "res\\WosaXFSTestDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_FILE_PRINT
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About WosaXFSTest...",       ID_APP_ABOUT
+    END
+END
+
+IDR_WOSAXFTYPE MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+    END
+    POPUP "Settings"
+    BEGIN
+        MENUITEM "Working Directory",           ID_SETTINGS_WORKDIR
+        MENUITEM "GetInfo Category",            ID_SETTINGS_GetInfo
+        MENUITEM "Execute Command",             ID_SETTINGS_Execute
+        MENUITEM SEPARATOR
+        MENUITEM "Enable Multiple Fields",      ID_SETTINGS_ENABLE_MULTIPLE
+    END
+    POPUP "Action"
+    BEGIN
+        MENUITEM "Execute Scripts",             ID_ACTION_SCRIPTS
+        MENUITEM "Load Print Data",             ID_ACTION_LOAD_EXE_DATA
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About WosaXFSTest...",       ID_APP_ABOUT
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName", "\0"
+            VALUE "FileDescription", "WosaXFSTest MFC Application\0"
+            VALUE "FileVersion", "1, 0, 0, 1\0"
+            VALUE "InternalName", "WosaXFSTest\0"
+            VALUE "LegalCopyright", "Copyright (C) 2008\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "WosaXFSTest.EXE\0"
+            VALUE "ProductName", "WosaXFSTest Application\0"
+            VALUE "ProductVersion", "1, 0, 0, 1\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "WosaXFSTest"
+    IDR_WOSAXFTYPE          "\nWosaXF\nWosaXF\n\n\nWosaXFSTest.Document\nWosaXF Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "WosaXFSTest"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\WosaXFSTest.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

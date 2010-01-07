@@ -2,9 +2,9 @@
 
 
 /* File created by MIDL compiler version 5.01.0164 */
-/* at Tue Nov 24 13:47:58 2009
+/* at Fri Dec 18 23:52:07 2009
  */
-/* Compiler settings for E:\OpenXFSV0.0.4\PTROcx\PTROcx.idl:
+/* Compiler settings for D:\OpenXFSV0.0.4\PTROcx\PTROcx.idl:
     Oicf (OptLev=i2), W1, Zp8, env=Win32, ms_ext, c_ext
     error checks: allocation ref bounds_check enum stub_data 
 */
@@ -113,6 +113,12 @@ EXTERN_C const IID IID_IXFSPrint;
         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Result( 
             /* [in] */ BSTR newVal) = 0;
         
+        virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaName( 
+            /* [retval][out] */ BSTR __RPC_FAR *pVal) = 0;
+        
+        virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MediaName( 
+            /* [in] */ BSTR newVal) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -201,6 +207,14 @@ EXTERN_C const IID IID_IXFSPrint;
             IXFSPrint __RPC_FAR * This,
             /* [in] */ BSTR newVal);
         
+        /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE __RPC_FAR *get_MediaName )( 
+            IXFSPrint __RPC_FAR * This,
+            /* [retval][out] */ BSTR __RPC_FAR *pVal);
+        
+        /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE __RPC_FAR *put_MediaName )( 
+            IXFSPrint __RPC_FAR * This,
+            /* [in] */ BSTR newVal);
+        
         END_INTERFACE
     } IXFSPrintVtbl;
 
@@ -266,6 +280,12 @@ EXTERN_C const IID IID_IXFSPrint;
 
 #define IXFSPrint_put_Result(This,newVal)	\
     (This)->lpVtbl -> put_Result(This,newVal)
+
+#define IXFSPrint_get_MediaName(This,pVal)	\
+    (This)->lpVtbl -> get_MediaName(This,pVal)
+
+#define IXFSPrint_put_MediaName(This,newVal)	\
+    (This)->lpVtbl -> put_MediaName(This,newVal)
 
 #endif /* COBJMACROS */
 
@@ -388,6 +408,30 @@ void __RPC_STUB IXFSPrint_get_Result_Stub(
 
 
 void __RPC_STUB IXFSPrint_put_Result_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE IXFSPrint_get_MediaName_Proxy( 
+    IXFSPrint __RPC_FAR * This,
+    /* [retval][out] */ BSTR __RPC_FAR *pVal);
+
+
+void __RPC_STUB IXFSPrint_get_MediaName_Stub(
+    IRpcStubBuffer *This,
+    IRpcChannelBuffer *_pRpcChannelBuffer,
+    PRPC_MESSAGE _pRpcMessage,
+    DWORD *_pdwStubPhase);
+
+
+/* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE IXFSPrint_put_MediaName_Proxy( 
+    IXFSPrint __RPC_FAR * This,
+    /* [in] */ BSTR newVal);
+
+
+void __RPC_STUB IXFSPrint_put_MediaName_Stub(
     IRpcStubBuffer *This,
     IRpcChannelBuffer *_pRpcChannelBuffer,
     PRPC_MESSAGE _pRpcMessage,

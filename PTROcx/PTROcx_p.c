@@ -2,9 +2,9 @@
 
 
 /* File created by MIDL compiler version 5.01.0164 */
-/* at Tue Nov 24 13:47:58 2009
+/* at Fri Dec 18 23:52:07 2009
  */
-/* Compiler settings for E:\OpenXFSV0.0.4\PTROcx\PTROcx.idl:
+/* Compiler settings for D:\OpenXFSV0.0.4\PTROcx\PTROcx.idl:
     Oicf (OptLev=i2), W1, Zp8, env=Win32, ms_ext, c_ext
     error checks: allocation ref bounds_check enum stub_data 
 */
@@ -28,7 +28,7 @@
 #include "PTROcx.h"
 
 #define TYPE_FORMAT_STRING_SIZE   55                                
-#define PROC_FORMAT_STRING_SIZE   281                               
+#define PROC_FORMAT_STRING_SIZE   337                               
 
 typedef struct _MIDL_TYPE_FORMAT_STRING
     {
@@ -106,7 +106,9 @@ static const unsigned short IXFSPrint_FormatStringOffsetTable[] =
     168,
     202,
     224,
-    252
+    252,
+    280,
+    308
     };
 
 static const MIDL_SERVER_INFO IXFSPrint_ServerInfo = 
@@ -131,7 +133,7 @@ static const MIDL_STUBLESS_PROXY_INFO IXFSPrint_ProxyInfo =
     0
     };
 
-CINTERFACE_PROXY_VTABLE(17) _IXFSPrintProxyVtbl = 
+CINTERFACE_PROXY_VTABLE(19) _IXFSPrintProxyVtbl = 
 {
     &IXFSPrint_ProxyInfo,
     &IID_IXFSPrint,
@@ -151,7 +153,9 @@ CINTERFACE_PROXY_VTABLE(17) _IXFSPrintProxyVtbl =
     (void *)-1 /* IXFSPrint::AddField */ ,
     (void *)-1 /* IXFSPrint::DoPrint */ ,
     (void *)-1 /* IXFSPrint::get_Result */ ,
-    (void *)-1 /* IXFSPrint::put_Result */
+    (void *)-1 /* IXFSPrint::put_Result */ ,
+    (void *)-1 /* IXFSPrint::get_MediaName */ ,
+    (void *)-1 /* IXFSPrint::put_MediaName */
 };
 
 
@@ -170,6 +174,8 @@ static const PRPC_STUB_FUNCTION IXFSPrint_table[] =
     NdrStubCall2,
     NdrStubCall2,
     NdrStubCall2,
+    NdrStubCall2,
+    NdrStubCall2,
     NdrStubCall2
 };
 
@@ -177,7 +183,7 @@ CInterfaceStubVtbl _IXFSPrintStubVtbl =
 {
     &IID_IXFSPrint,
     &IXFSPrint_ServerInfo,
-    17,
+    19,
     &IXFSPrint_table[-3],
     CStdStubBuffer_DELEGATING_METHODS
 };
@@ -582,6 +588,80 @@ static const MIDL_PROC_FORMAT_STRING __MIDL_ProcFormatString =
 			NdrFcShort( 0x10 ),	/* Alpha Stack size/offset = 16 */
 #endif
 /* 278 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure get_MediaName */
+
+/* 280 */	0x33,		/* FC_AUTO_HANDLE */
+			0x6c,		/* Old Flags:  object, Oi2 */
+/* 282 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 286 */	NdrFcShort( 0x11 ),	/* 17 */
+#ifndef _ALPHA_
+/* 288 */	NdrFcShort( 0xc ),	/* x86, MIPS, PPC Stack size/offset = 12 */
+#else
+			NdrFcShort( 0x18 ),	/* Alpha Stack size/offset = 24 */
+#endif
+/* 290 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 292 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 294 */	0x5,		/* Oi2 Flags:  srv must size, has return, */
+			0x2,		/* 2 */
+
+	/* Parameter pVal */
+
+/* 296 */	NdrFcShort( 0x2113 ),	/* Flags:  must size, must free, out, simple ref, srv alloc size=8 */
+#ifndef _ALPHA_
+/* 298 */	NdrFcShort( 0x4 ),	/* x86, MIPS, PPC Stack size/offset = 4 */
+#else
+			NdrFcShort( 0x8 ),	/* Alpha Stack size/offset = 8 */
+#endif
+/* 300 */	NdrFcShort( 0x1e ),	/* Type Offset=30 */
+
+	/* Return value */
+
+/* 302 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+#ifndef _ALPHA_
+/* 304 */	NdrFcShort( 0x8 ),	/* x86, MIPS, PPC Stack size/offset = 8 */
+#else
+			NdrFcShort( 0x10 ),	/* Alpha Stack size/offset = 16 */
+#endif
+/* 306 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure put_MediaName */
+
+/* 308 */	0x33,		/* FC_AUTO_HANDLE */
+			0x6c,		/* Old Flags:  object, Oi2 */
+/* 310 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 314 */	NdrFcShort( 0x12 ),	/* 18 */
+#ifndef _ALPHA_
+/* 316 */	NdrFcShort( 0xc ),	/* x86, MIPS, PPC Stack size/offset = 12 */
+#else
+			NdrFcShort( 0x18 ),	/* Alpha Stack size/offset = 24 */
+#endif
+/* 318 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 320 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 322 */	0x6,		/* Oi2 Flags:  clt must size, has return, */
+			0x2,		/* 2 */
+
+	/* Parameter newVal */
+
+/* 324 */	NdrFcShort( 0x8b ),	/* Flags:  must size, must free, in, by val, */
+#ifndef _ALPHA_
+/* 326 */	NdrFcShort( 0x4 ),	/* x86, MIPS, PPC Stack size/offset = 4 */
+#else
+			NdrFcShort( 0x8 ),	/* Alpha Stack size/offset = 8 */
+#endif
+/* 328 */	NdrFcShort( 0x2c ),	/* Type Offset=44 */
+
+	/* Return value */
+
+/* 330 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+#ifndef _ALPHA_
+/* 332 */	NdrFcShort( 0x8 ),	/* x86, MIPS, PPC Stack size/offset = 8 */
+#else
+			NdrFcShort( 0x10 ),	/* Alpha Stack size/offset = 16 */
+#endif
+/* 334 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 			0x0
