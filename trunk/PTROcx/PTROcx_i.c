@@ -5,9 +5,9 @@
 
 
 /* File created by MIDL compiler version 5.01.0164 */
-/* at Tue Nov 24 13:47:58 2009
+/* at Fri Dec 18 23:52:07 2009
  */
-/* Compiler settings for E:\OpenXFSV0.0.4\PTROcx\PTROcx.idl:
+/* Compiler settings for D:\OpenXFSV0.0.4\PTROcx\PTROcx.idl:
     Oicf (OptLev=i2), W1, Zp8, env=Win32, ms_ext, c_ext
     error checks: allocation ref bounds_check enum stub_data 
 */

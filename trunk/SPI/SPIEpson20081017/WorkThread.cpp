@@ -105,6 +105,7 @@ LRESULT CWorkThread::OnSPOpen(WPARAM wParam, LPARAM lParam)
 
 	if(pServiceBasic)
 	{
+
 		int nLock = pServiceBasic->QueryLogicalServiceLock(pServiceBasic->m_strLogicalName);
 
 		if(nLock <= 0)
@@ -134,18 +135,16 @@ LRESULT CWorkThread::OnSPOpen(WPARAM wParam, LPARAM lParam)
 					m_pDC = 0;
 					hr = WFS_ERR_CONNECTION_LOST;
 				}
-				//else
-				else if(0)  // tang, this section seems no need.
+				else
 				{
 					//save logicalname 
 					m_strLogicalName = pServiceBasic->m_strLogicalName;
 
-					//set the m_pdc environment
+					//set the m_pdc envirment
 
 					m_pDC->SetMapMode(MM_ANISOTROPIC);
 					CSize size = CSize(800,560);
 					m_pDC->SetWindowExt(size);
-
 					int xLogPixPerInch = m_pDC->GetDeviceCaps(LOGPIXELSX);
 					int yLogPixPerInch = m_pDC->GetDeviceCaps(LOGPIXELSY);
 					
@@ -167,11 +166,6 @@ LRESULT CWorkThread::OnSPOpen(WPARAM wParam, LPARAM lParam)
 					
 					m_pDC->SetViewportExt((int)xExt,(int)yExt);
 					//delete pServiceBasic->m_pDC;
-				}
-				else
-				{
-					//m_pDC->SetMapMode(MM_ANISOTROPIC);
-					m_pDC->SetMapMode(MM_TEXT);
 				}
 			}
 		}

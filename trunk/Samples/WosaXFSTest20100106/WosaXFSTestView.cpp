@@ -683,6 +683,7 @@ LRESULT CWosaXFSTestView::OnCompleteGetInfo(WPARAM wParam, LPARAM lParam)
 				UpdateData(FALSE);
 			}
 			break;
+/*
 			case 3:
 			{
 				if(pResult == 0 || (pResult && pResult->hResult != S_OK))
@@ -706,6 +707,40 @@ LRESULT CWosaXFSTestView::OnCompleteGetInfo(WPARAM wParam, LPARAM lParam)
 				}
 				m_strResult += strOut;
 				UpdateData(FALSE);
+			}
+			break;
+*/
+
+			case 3:  // media list
+			{
+				m_comoMedia.ResetContent();
+
+				//m_pfnWFSGetInfo (m_hSyncService,WFS_INF_PTR_MEDIA_LIST,
+				//NULL, 10000, &pResult);
+				if(pResult == 0 || (pResult && pResult->hResult != S_OK))
+				{
+					CString str;
+					str.Format("Get media list failed. Result = %d\r\n", pResult->hResult);
+					m_strResult += str;
+					UpdateData(FALSE);
+					m_pfnWFSFreeResult(pResult);
+					return 0;
+				}
+
+				CString strOut = "Media: \r\n";
+				char *lp = (char *)pResult->lpBuffer;
+				while(lp && _tcslen(lp) > 0)
+				{
+					m_comoMedia.AddString(CString(lp));
+
+					strOut += "  " + CString(lp) + "\r\n";
+					char *lp1 = _tcschr(lp,0);
+					lp = lp1+1;
+				}
+				m_strResult += strOut;
+				UpdateData(FALSE);
+
+				m_comoMedia.SetCurSel(0);
 			}
 			break;
 			case 4:
@@ -746,6 +781,21 @@ LRESULT CWosaXFSTestView::OnCompleteGetInfo(WPARAM wParam, LPARAM lParam)
 			}
 			break;
 			case 5:
+			{
+				if(pResult == 0 || (pResult && pResult->hResult != S_OK))
+				{
+					CString str;
+					str.Format("Get Media %s of %s failed. Result = %d\r\n",m_strSelectField,m_strFormName, pResult->hResult);
+					m_strResult += str;
+					UpdateData(FALSE);
+					m_pfnWFSFreeResult(pResult);
+					return 0;
+				}
+				LPWFSFRMMEDIA lpWFSFRMMEDIA = (LPWFSFRMMEDIA )pResult->lpBuffer;
+
+				if(lpWFSFRMMEDIA) ShowMediaField(lpWFSFRMMEDIA);
+				UpdateData(FALSE);
+			}
 			break;
 			case 6:
 			{
@@ -1021,8 +1071,8 @@ void CWosaXFSTestView::OnButtonAsyncExecute_PrintForm()
 		UpdateData(TRUE);
 
 		WriteScript("Form", m_strFormName, _T(""));
-		WriteScript("Do", _T("AsyncExecute"), _T(""));
-
+		WriteScript("Media", m_strSelectedMedia, _T(""));
+		WriteScript("Do", _T("SyncExecute"), _T(""));
 
 		//REQUESTID *pID = (REQUESTID *)calloc(1,sizeof(REQUESTID)); 
 		REQUESTID *pID = 0; //(REQUESTID *)calloc(1,sizeof(REQUESTID)); 
@@ -1032,14 +1082,233 @@ void CWosaXFSTestView::OnButtonAsyncExecute_PrintForm()
 		pID = &m_IPGetInfoAsyncExecute;
 		*pID = 0x00;
 
-		TCHAR *pChar = 0;
-		m_pfnWFMAllocateBuffer(m_strFormName.GetLength() + 2, WFS_MEM_ZEROINIT, (void **)&pChar);
-		memcpy(pChar,m_strFormName.GetBuffer(0),m_strFormName.GetLength());
 
-		(*m_pfnWFSAsyncGetInfo) (*m_pAsyncService,WFS_INF_PTR_QUERY_FORM, pChar, 
-			10000,m_hWnd, pID);
-		//m_IPGetInfoAsyncExecute = *pID;
-		//m_pfnWFMFreeBuffer(pID);
+		WFSPTRPRINTFORM *pwfsform = 0;
+		m_pfnWFMAllocateBuffer(sizeof(WFSPTRPRINTFORM), WFS_MEM_ZEROINIT, (void **)&pwfsform);
+		if(m_strExeDataFile == "")
+		{
+			CStringArray FieldArray;
+			{
+				WFSRESULT *pResult = 0;
+
+				char *pData = 0;
+				if(m_pfnWFMAllocateBuffer)  m_pfnWFMAllocateBuffer(m_strFormName.GetLength() + 1, 
+				WFS_MEM_ZEROINIT, (void **)&pData);
+				memcpy(pData,m_strFormName.GetBuffer(0),m_strFormName.GetLength());
+
+				(*m_pfnWFSGetInfo) (m_hSyncService,WFS_INF_PTR_QUERY_FORM,
+					pData, 10000, &pResult);
+
+				m_pfnWFMFreeBuffer(pData);
+
+				if(pResult == 0 || (pResult && pResult->hResult != S_OK))
+				{
+					CString str;
+					if(pResult) str.Format("Get fields failed. Result = %d\r\n", pResult->hResult);
+					else str.Format("Get fields failed");
+					m_strResult += str;
+					UpdateData(FALSE);
+					m_pfnWFSFreeResult(pResult);
+					return;
+				}
+
+				LPWFSFRMHEADER lpFormHeader = (LPWFSFRMHEADER )pResult->lpBuffer;
+				char *lp = (char *)lpFormHeader->lpszFields;
+				while(_tcslen(lp) > 0)
+				{
+					FieldArray.Add(CString(lp));
+					char *lp1 = _tcschr(lp,0);
+					lp = lp1+1;
+				}
+			
+
+				m_pfnWFSFreeResult(pResult);
+			}
+			
+			CString strTextOut = "";
+			long nCountNeeded = 0;
+			long nFields = FieldArray.GetSize();
+			for(long n = 0; n<nFields; n++)
+			{
+				if(m_bEnableMultipleFields)
+				{
+					UpdateData(TRUE);
+
+					CString strSelectField = FieldArray.GetAt(n);
+
+					WFSRESULT *pResult = 0;
+					WFSPTRQUERYFIELD *pqueryField = 0;
+					m_pfnWFMAllocateBuffer(sizeof(WFSPTRQUERYFIELD), WFS_MEM_ZEROINIT, (void **)&pqueryField);
+
+					m_pfnWFMAllocateMore(m_strFormName.GetLength() + 1,pqueryField, (void **)&pqueryField->lpszFormName);
+					memcpy(pqueryField->lpszFormName, m_strFormName.GetBuffer(0),m_strFormName.GetLength());
+					
+					{
+						m_pfnWFMAllocateMore(strSelectField.GetLength() + 1,pqueryField, (void **)&pqueryField->lpszFieldName);
+						memcpy(pqueryField->lpszFieldName, strSelectField.GetBuffer(0),strSelectField.GetLength());
+				
+					}
+
+					m_pfnWFSGetInfo (m_hSyncService,WFS_INF_PTR_QUERY_FIELD,
+					pqueryField, 10000, &pResult);
+
+					m_pfnWFMFreeBuffer(pqueryField);
+
+					if(pResult == 0 || (pResult && pResult->hResult != S_OK))
+					{
+						CString str;
+						if(pResult) str.Format("Get field %s of %s failed. Result = %d\r\n",m_strSelectField,m_strFormName, pResult->hResult);
+						else str.Format("Get field %s of %s failed. \r\n",m_strSelectField,m_strFormName);
+						m_strResult += str;
+						UpdateData(FALSE);
+						m_pfnWFSFreeResult(pResult);
+						return;
+					}
+
+					LPWFSFRMFIELD *lpFromFieldList = (LPWFSFRMFIELD *)pResult->lpBuffer;
+					if(lpFromFieldList) 
+					{
+						LPWFSFRMFIELD lpFromField = lpFromFieldList[0];
+						long nIndex = lpFromField->wIndexCount;
+						if(nIndex <= 0) nIndex = 1;
+						for(long iField =0; iField<nIndex; iField++)
+						{
+							CString str ;
+							str.Format("%s[%d]=%d:%s(%d)",FieldArray.GetAt(n),iField,n+1,FieldArray.GetAt(n),iField);
+							nCountNeeded += str.GetLength() + sizeof(TCHAR);
+						}
+						nCountNeeded += sizeof(TCHAR) * 5;
+					}
+					m_pfnWFSFreeResult(pResult);
+				}
+				else
+				{
+					CString strNum = "";
+					strNum.Format("%d:",n+1);
+					CString str = FieldArray.GetAt(n);
+					CString str1 = strNum+FieldArray.GetAt(n);
+					strTextOut += str + "=" + str1;
+					nCountNeeded += strTextOut.GetLength() + sizeof(TCHAR);
+
+
+					nCountNeeded += sizeof(TCHAR);
+				}
+			}
+			/************************************************************/		  
+			m_pfnWFMAllocateMore(nCountNeeded, pwfsform, (void **)&pwfsform->lpszFields);
+			/***************************************************/
+			if(m_bEnableMultipleFields)
+			{
+				long nOffset = 0;
+				for(long n = 0; n<nFields; n++)
+				{
+					CString strSelectField = FieldArray.GetAt(n);
+
+					WFSRESULT *pResult = 0;
+					WFSPTRQUERYFIELD *pqueryField = 0;
+					m_pfnWFMAllocateBuffer(sizeof(WFSPTRQUERYFIELD), WFS_MEM_ZEROINIT, (void **)&pqueryField);
+
+					m_pfnWFMAllocateMore(m_strFormName.GetLength() + 1,pqueryField, (void **)&pqueryField->lpszFormName);
+					memcpy(pqueryField->lpszFormName, m_strFormName.GetBuffer(0),m_strFormName.GetLength());
+					
+					{
+						m_pfnWFMAllocateMore(strSelectField.GetLength() + 1,pqueryField, (void **)&pqueryField->lpszFieldName);
+						memcpy(pqueryField->lpszFieldName, strSelectField.GetBuffer(0),strSelectField.GetLength());
+				
+					}
+
+					m_pfnWFSGetInfo (m_hSyncService,WFS_INF_PTR_QUERY_FIELD,
+					pqueryField, 10000, &pResult);
+
+					m_pfnWFMFreeBuffer(pqueryField);
+
+					if(pResult == 0 || (pResult && pResult->hResult != S_OK))
+					{
+						CString str;
+						str.Format("Get field %s of %s failed. Result = %d\r\n",m_strSelectField,m_strFormName, pResult->hResult);
+						m_strResult += str;
+						UpdateData(FALSE);
+						m_pfnWFSFreeResult(pResult);
+						return;
+					}
+
+					LPWFSFRMFIELD *lpFromFieldList = (LPWFSFRMFIELD *)pResult->lpBuffer;
+					if(lpFromFieldList) 
+					{
+						LPWFSFRMFIELD lpFromField = lpFromFieldList[0];
+						long nIndex = lpFromField->wIndexCount;
+						if(nIndex <= 0) nIndex = 1;
+						for(long iField =0; iField<nIndex; iField++)
+						{
+							CString str ;
+							str.Format("%s[%d]=%d:%s(%d)",FieldArray.GetAt(n),iField,n+1,FieldArray.GetAt(n),iField);
+							memcpy(pwfsform->lpszFields+nOffset,str,str.GetLength());
+							nOffset += str.GetLength() + sizeof(TCHAR);
+						}
+					
+					}
+					m_pfnWFSFreeResult(pResult);
+				}
+			}
+			else
+			{
+				long nOffset = 0;
+				for(long n = 0; n<nFields; n++)
+				{
+					CString strNum = "";
+					strNum.Format("%d:",n+1);
+					CString str = FieldArray.GetAt(n);
+					CString str1 = strNum+FieldArray.GetAt(n);
+					//CString str1 = strNum;
+					strTextOut = str + "=" + str1;
+					memcpy(pwfsform->lpszFields+nOffset,strTextOut,strTextOut.GetLength());
+					nOffset += strTextOut.GetLength() + sizeof(TCHAR);
+				}
+			}
+		}
+		else  // from the data file
+		{
+			CFile cf;
+			if(cf.Open(m_strExeDataFile, CFile::modeRead ))
+			{
+				long nLen = cf.GetLength();
+				m_pfnWFMAllocateMore(nLen+5, pwfsform, (void **)&pwfsform->lpszFields);
+				cf.Read(pwfsform->lpszFields,nLen);
+				cf.Close();
+			}
+		}
+/*********************************************************/	
+
+		WFSRESULT *pResult = 0;
+
+		if(m_strFormName != "")
+		{
+			m_pfnWFMAllocateMore(m_strFormName.GetLength()+1, pwfsform, (void **)&pwfsform->lpszFormName);
+			memcpy(pwfsform->lpszFormName,m_strFormName.GetBuffer(0),m_strFormName.GetLength());
+		}
+
+		if(m_strSelectedMedia != "")
+		{
+			m_pfnWFMAllocateMore(m_strSelectedMedia.GetLength()+1, pwfsform, (void **)&pwfsform->lpszMediaName);
+			memcpy(pwfsform->lpszMediaName,m_strSelectedMedia.GetBuffer(0),m_strSelectedMedia.GetLength());
+		}
+
+		pwfsform->wAlignment = WFS_PTR_ALNUSEFORMDEFN;
+		pwfsform->wOffsetX = WFS_PTR_OFFSETUSEFORMDEFN;
+		pwfsform->wOffsetY = WFS_PTR_OFFSETUSEFORMDEFN;
+		pwfsform->wResolution = WFS_PTR_RESHIGH;
+#ifdef _V2_
+#else
+		pwfsform->wPaperSource = WFS_PTR_PAPERANY;
+#endif
+
+		pwfsform->dwMediaControl= 0;
+
+			
+		(*m_pfnWFSAsyncExecute) (*m_pAsyncService,WFS_CMD_PTR_PRINT_FORM,
+			pwfsform, 10000, m_hWnd, pID);
+
+		m_pfnWFMFreeBuffer(pwfsform);
 
 	}
 }
@@ -1071,6 +1340,7 @@ void CWosaXFSTestView::OnButtonSyncExecute()
 	switch(m_dwCommandIndex)
 	{
 		case 0:  // WFS_CMD_PTR_CONTROL_MEDIA
+			OnButtonSyncExecute_ControlMedia();
 		break;
 		case 1:
 			OnButtonSyncExecute_PrintForm();
@@ -1101,6 +1371,7 @@ void CWosaXFSTestView::OnButtonSyncExecute_PrintForm()
 	{
 	
 		WriteScript("Form", m_strFormName, _T(""));
+		WriteScript("Media", m_strSelectedMedia, _T(""));
 		WriteScript("Do", _T("SyncExecute"), _T(""));
 
 		WFSPTRPRINTFORM *pwfsform = 0;
@@ -1301,8 +1572,18 @@ void CWosaXFSTestView::OnButtonSyncExecute_PrintForm()
 
 		WFSRESULT *pResult = 0;
 
-		m_pfnWFMAllocateMore(m_strFormName.GetLength()+1, pwfsform, (void **)&pwfsform->lpszFormName);
-		memcpy(pwfsform->lpszFormName,m_strFormName.GetBuffer(0),m_strFormName.GetLength());
+		if(m_strFormName != "")
+		{
+			m_pfnWFMAllocateMore(m_strFormName.GetLength()+1, pwfsform, (void **)&pwfsform->lpszFormName);
+			memcpy(pwfsform->lpszFormName,m_strFormName.GetBuffer(0),m_strFormName.GetLength());
+		}
+
+		if(m_strSelectedMedia != "")
+		{
+			m_pfnWFMAllocateMore(m_strSelectedMedia.GetLength()+1, pwfsform, (void **)&pwfsform->lpszMediaName);
+			memcpy(pwfsform->lpszMediaName,m_strSelectedMedia.GetBuffer(0),m_strSelectedMedia.GetLength());
+		}
+
 		pwfsform->wAlignment = WFS_PTR_ALNUSEFORMDEFN;
 		pwfsform->wOffsetX = WFS_PTR_OFFSETUSEFORMDEFN;
 		pwfsform->wOffsetY = WFS_PTR_OFFSETUSEFORMDEFN;
@@ -1327,6 +1608,34 @@ void CWosaXFSTestView::OnButtonSyncExecute_PrintForm()
 		}
 		(*m_pfnWFSFreeResult)(pResult);
 		m_pfnWFMFreeBuffer(pwfsform);
+	}	
+}
+
+void CWosaXFSTestView::OnButtonSyncExecute_ControlMedia() 
+{
+	UpdateData(TRUE);
+	if(m_hSyncService)
+	{
+	
+		//WriteScript("Form", m_strFormName, _T(""));
+		WriteScript("Do", _T("SyncExecute"), _T(""));
+
+		WFSRESULT *pResult = 0;
+
+		DWORD dwMediaControl = WFS_PTR_CTRLFLUSH;
+
+		(*m_pfnWFSExecute) (m_hSyncService,WFS_CMD_PTR_CONTROL_MEDIA,
+			&dwMediaControl, 10000, &pResult);
+
+		if(pResult)
+		{
+			CString str;
+			str.Format("OK Sync Execute Result = %d\r\n", pResult->hResult);
+			m_strResult += str;
+			UpdateData(FALSE);
+		}
+		(*m_pfnWFSFreeResult)(pResult);
+
 	}	
 }
 
@@ -1408,7 +1717,7 @@ void CWosaXFSTestView::OnButtonSyncGetinfo()
 
 			}
 			break;
-			case 2:
+			case 2:  // form list
 			{
 				(*m_pfnWFSGetInfo) (m_hSyncService,WFS_INF_PTR_FORM_LIST,
 				NULL, 10000, &pResult);
@@ -1440,8 +1749,10 @@ void CWosaXFSTestView::OnButtonSyncGetinfo()
 				UpdateData(FALSE);
 			}
 			break;
-			case 3:
+			case 3:  // media list
 			{
+				m_comoMedia.ResetContent();
+
 				m_pfnWFSGetInfo (m_hSyncService,WFS_INF_PTR_MEDIA_LIST,
 				NULL, 10000, &pResult);
 				if(pResult == 0 || (pResult && pResult->hResult != S_OK))
@@ -1458,15 +1769,19 @@ void CWosaXFSTestView::OnButtonSyncGetinfo()
 				char *lp = (char *)pResult->lpBuffer;
 				while(lp && _tcslen(lp) > 0)
 				{
+					m_comoMedia.AddString(CString(lp));
+
 					strOut += "  " + CString(lp) + "\r\n";
 					char *lp1 = _tcschr(lp,0);
 					lp = lp1+1;
 				}
 				m_strResult += strOut;
 				UpdateData(FALSE);
+
+				m_comoMedia.SetCurSel(0);
 			}
 			break;
-			case 4:
+			case 4:  // query form
 			{
 				//m_pfnWFSGetInfo (m_hSyncService,WFS_INF_PTR_QUERY_FORM,
 				//"MySyncGetInfo", 1000, &pResult);
@@ -1479,12 +1794,12 @@ void CWosaXFSTestView::OnButtonSyncGetinfo()
 
 				char *pData = 0;
 				if(m_pfnWFMAllocateBuffer)  m_pfnWFMAllocateBuffer(m_strFormName.GetLength() + 1, 
-				WFS_MEM_ZEROINIT, (void **)&pData);
+					WFS_MEM_ZEROINIT, (void **)&pData);
 				memcpy(pData,m_strFormName.GetBuffer(0),m_strFormName.GetLength());
-
+				
 				(*m_pfnWFSGetInfo) (m_hSyncService,WFS_INF_PTR_QUERY_FORM,
 					pData, 10000, &pResult);
-
+				
 				m_pfnWFMFreeBuffer(pData);
 
 
@@ -1518,13 +1833,43 @@ void CWosaXFSTestView::OnButtonSyncGetinfo()
 				UpdateData(FALSE);
 			}
 			break;
-			case 5:
+			case 5:  // query  media
 			{
+				UpdateData(TRUE);
+
+				char *pData = 0;
+				if(m_pfnWFMAllocateBuffer)  m_pfnWFMAllocateBuffer(m_strSelectedMedia.GetLength() + 1, 
+					WFS_MEM_ZEROINIT, (void **)&pData);
+				memcpy(pData,m_strSelectedMedia.GetBuffer(0),m_strSelectedMedia.GetLength());
+
 				m_pfnWFSGetInfo (m_hSyncService,WFS_INF_PTR_QUERY_MEDIA,
-				"MySyncGetInfo", 1000, &pResult);
+				pData, 1000, &pResult);
+
+				m_pfnWFMFreeBuffer(pData);
+				
+				
+				if(pResult == 0 || (pResult && pResult->hResult != S_OK))
+				{
+					CString str;
+					str.Format("Get Media %s of %s failed. Result = %d\r\n",m_strSelectField,m_strFormName, pResult->hResult);
+					m_strResult += str;
+					UpdateData(FALSE);
+					m_pfnWFSFreeResult(pResult);
+					return;
+				}
+				
+				LPWFSFRMMEDIA lpWFSFRMMEDIA = (LPWFSFRMMEDIA )pResult->lpBuffer;
+
+				if(lpWFSFRMMEDIA) ShowMediaField(lpWFSFRMMEDIA);
+				UpdateData(FALSE);
+				//LPWFSFRMFIELD lpFromField = (LPWFSFRMFIELD)pResult->lpBuffer;
+				//ShowFromField(lpFromField);
+				//LPWFSFRMFIELD *lpFromFieldList = (LPWFSFRMFIELD *)pResult->lpBuffer;
+				//if(lpFromFieldList) ShowFromFieldList(lpFromFieldList);
+				//UpdateData(FALSE);
 			}
 			break;
-			case 6:
+			case 6:  // query field
 			{
 				UpdateData(TRUE);
 
@@ -1653,8 +1998,14 @@ void CWosaXFSTestView::OnButtonAsyncGetinfo()
 			break;
 			case 5:
 			{
-				(*m_pfnWFSAsyncGetInfo) (*m_pAsyncService,WFS_INF_PTR_QUERY_MEDIA, "MyAsyncGetInfo", 
+				char *pData = 0;
+				if(m_pfnWFMAllocateBuffer)  m_pfnWFMAllocateBuffer(m_strSelectedMedia.GetLength() + 1, 
+					WFS_MEM_ZEROINIT, (void **)&pData);
+				memcpy(pData,m_strSelectedMedia.GetBuffer(0),m_strSelectedMedia.GetLength());
+				
+				(*m_pfnWFSAsyncGetInfo) (*m_pAsyncService,WFS_INF_PTR_QUERY_MEDIA, pData, 
 				10000,m_hWnd, pID);
+				m_pfnWFMFreeBuffer(pData);
 			}
 			break;
 			case 6:
@@ -1677,6 +2028,8 @@ void CWosaXFSTestView::OnButtonAsyncGetinfo()
 
 				(*m_pfnWFSAsyncGetInfo)(*m_pAsyncService,WFS_INF_PTR_QUERY_FIELD,
 				pqueryField, 10000,m_hWnd, pID);
+
+				m_pfnWFMFreeBuffer(pqueryField);
 			}
 			break;
 		}
@@ -2584,6 +2937,52 @@ void CWosaXFSTestView::ShowFromField(LPWFSFRMFIELD lpFromField)
 #endif
 
 }
+
+void CWosaXFSTestView::ShowMediaField(WFSFRMMEDIA* lpWfsMedia)
+{	
+	CString str;
+	str.Format("MediaType %d\r\n",lpWfsMedia->fwMediaType);
+	m_strResult += str;
+	str.Format("Base %d\r\n",lpWfsMedia->wBase);
+	m_strResult += str;
+	str.Format("UnitX %d\r\n",lpWfsMedia->wUnitX);
+	m_strResult += str;
+	str.Format("UnitY %d\r\n",lpWfsMedia->wUnitY);
+	m_strResult += str;
+	str.Format("SizeWidth %d\r\n",lpWfsMedia->wSizeWidth);
+	m_strResult += str;
+	str.Format("SizeHeight %d\r\n",lpWfsMedia->wSizeHeight);
+	m_strResult += str;
+
+	str.Format("PageCount %d\r\n",lpWfsMedia->wPageCount);
+	m_strResult += str;
+	str.Format("LineCount %d\r\n",lpWfsMedia->wLineCount);
+	m_strResult += str;
+	str.Format("PrintAreaX %d\r\n",lpWfsMedia->wPrintAreaX);
+	m_strResult += str;
+	str.Format("PrintAreaY %d\r\n",lpWfsMedia->wPrintAreaY);
+	m_strResult += str;
+	str.Format("PrintAreaWidth %d\r\n",lpWfsMedia->wPrintAreaWidth);
+	m_strResult += str;
+	str.Format("PrintAreaHeight %d\r\n",lpWfsMedia->wPrintAreaHeight);
+	m_strResult += str;
+	str.Format("RestrictedAreaX %d\r\n",lpWfsMedia->wRestrictedAreaX);
+	m_strResult += str;
+
+	str.Format("RestrictedAreaY %d\r\n",lpWfsMedia->wRestrictedAreaY);
+	m_strResult += str;
+	str.Format("RestrictedAreaWidth %d\r\n",lpWfsMedia->wRestrictedAreaWidth);
+	m_strResult += str;
+	str.Format("RestrictedAreaHeight %d\r\n",lpWfsMedia->wRestrictedAreaHeight);
+	m_strResult += str;
+	str.Format("Stagger %d\r\n",lpWfsMedia->wStagger);
+	m_strResult += str;
+	str.Format("FoldType %d\r\n",lpWfsMedia->wFoldType);
+	m_strResult += str;
+	str.Format("PaperSources %d\r\n",lpWfsMedia->wPaperSources);
+	m_strResult += str;
+}
+
 
 HRESULT CWosaXFSTestView::GetLogicalServiceV3()
 {
