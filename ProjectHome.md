@@ -1,0 +1,1 @@
+To implement in VC++ the CEN XFS V3.0 specifications including the XFS manager, SPI's for various devices, and sample application codes. FreeXFS including a manager, sample SPI , and a manager testing program is now available.
